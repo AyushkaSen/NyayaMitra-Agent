@@ -1,0 +1,78 @@
+# NyayaMitra-Agent: aiKart-style Agent Manifest (template)
+# NOTE: field names follow a common agent-manifest layout. Align keys with the official
+# aiKart schema / validator before submission and adjust anything it rejects.
+apiVersion: aikart/v1
+kind: Agent
+metadata:
+  name: nyayamitra-agent
+  displayName: NyayaMitra-Agent
+  version: 0.1.0
+  description: >
+    Multi-agent assistant that helps MSMEs, street vendors and citizens navigate Indian government
+    compliance, scheme eligibility and document verification, and drafts the paperwork.
+  domain: [LegalTech & Compliance, Citizen & GovTech]
+  tags: [msme, street-vendor, compliance, schemes, multilingual, india]
+  languages: [en, hi, bn, ta, te, mr, gu, kn, ml, pa, or, hi-Latn]
+  maintainers:
+    - name: TODO-team-name
+      contact: TODO@example.com
+
+spec:
+  pattern: understand-reason-plan-use-tools-act-deliver
+  orchestrator:
+    framework: langgraph
+    entrypoint: app.graph:run_pipeline
+  agents:
+    - name: document-ocr-agent
+      role: Parse uploaded or pasted documents and validate Udyam, GSTIN, PAN, Aadhaar-format and FSSAI numbers
+      tools: [ocr_extract, validate_documents, extract_fields]
+    - name: scheme-compliance-agent
+      role: Retrieve and rank schemes from the local knowledge base and evaluate eligibility rules
+      tools: [kb_search, check_eligibility]
+    - name: action-workflow-agent
+      role: Produce a prioritised roadmap, pre-filled forms and formal draft letters
+      tools: [build_roadmap, prefill_forms, draft_letters, localize_letters]
+  knowledge:
+    - name: schemes-kb
+      type: local-json-vector-index
+      path: app/data/schemes.json
+      retrieval: tfidf-cosine   # swappable for Chroma / FAISS
+  model:
+    provider: anthropic
+    name: ${NYAYA_MODEL:-claude-sonnet-5-5}
+    required: false             # runs fully rule-based without an API key
+  interfaces:
+    - type: http
+      port: 8000
+      endpoints:
+        - {method: POST, path: /api/run, mode: sse-stream, input: multipart/form-data, description: Streams agent steps, tool calls and the final result}
+        - {method: POST, path: /api/run_sync, input: multipart/form-data, description: Returns the final result and full trace as JSON}
+        - {method: GET, path: /api/health}
+        - {method: GET, path: /api/schemes}
+      input_schema:
+        text: {type: string, description: Business or grievance description in any supported language}
+        file: {type: file, optional: true, accept: [image/*, application/pdf, text/plain]}
+      output_schema:
+        result: {type: object, fields: [summary, profile, documents, schemes, roadmap, forms, letters, disclaimer]}
+        trace: {type: array, description: Ordered agent steps and tool executions}
+
+runtime:
+  container:
+    image: nyayamitra-agent:latest
+    dockerfile: ./Dockerfile
+    port: 8000
+    healthcheck: /api/health
+  env:
+    - {name: ANTHROPIC_API_KEY, required: false, secret: true}
+    - {name: NYAYA_MODEL, required: false, default: claude-sonnet-5-5}
+    - {name: NYAYA_PACE, required: false, default: "0.2", description: Seconds between streamed UI events}
+  resources:
+    cpu: "1"
+    memory: 1Gi
+
+governance:
+  data_handling: Uploads processed in memory only; Aadhaar-format numbers masked; no persistent storage.
+  limitations:
+    - General guidance, not legal advice
+    - Document checks cover format and checksum only, not live registry status
+    - Scheme limits and links must be verified on official portals

@@ -1,0 +1,184 @@
+{
+  "_meta": {
+    "note": "Prototype knowledge base. Amounts, limits and links change often: verify on the official portal before applying.",
+    "last_reviewed": "2026-10"
+  },
+  "schemes": [
+    {
+      "id": "udyam", "name": "Udyam Registration", "kind": "registration", "level": "Central - Ministry of MSME", "priority": 1,
+      "desc": "Free online registration that gives a business its official MSME identity. Unlocks priority-sector loans, credit guarantee cover and delayed-payment protection.",
+      "benefit": "Udyam certificate and number; access to MSME schemes and the delayed-payment mechanism.",
+      "eligibility": "Any micro, small or medium enterprise (manufacturing or services). Self-declaration, Aadhaar-linked.",
+      "docs": ["Aadhaar of proprietor / partner / authorised signatory (with mobile linked for OTP)", "PAN (and GSTIN if you have one)", "Bank account details", "Business activity (NIC code), employee count, investment and turnover figures"],
+      "steps": ["Open the Udyam Registration portal and choose 'New Entrepreneur'", "Verify Aadhaar by OTP, then PAN", "Enter business name, address, activity, employees, investment and turnover", "Submit and download the certificate with your Udyam number. Registration is free"],
+      "url": "https://udyamregistration.gov.in",
+      "kw": ["msme", "udyam", "registration", "small business", "पंजीकरण", "उद्यम", "রেজিস্ট্রেশন", "উদ্যম"],
+      "rules": {"segments_any": ["business"], "skip_if_has": "udyam"}
+    },
+    {
+      "id": "vending_certificate", "name": "Certificate of Vending (Street Vendors Act, 2014)", "kind": "registration", "level": "Municipal - Town Vending Committee", "priority": 1,
+      "desc": "Legal recognition as a street vendor. The Act requires a survey, vending zones, notice and due process before relocation or eviction.",
+      "benefit": "Vending certificate / ID card; right to vend in a designated zone; protection against arbitrary eviction.",
+      "eligibility": "Street vendors enrolled in the Urban Local Body (municipality) survey, or applying to the Town Vending Committee.",
+      "docs": ["Proof of identity and address", "Passport photographs", "Proof of existing vending (photos, receipts, witness statement)"],
+      "steps": ["Visit your ward office / municipality and ask for the street-vendor survey or enrolment", "Submit identity proof and proof of vending", "Collect the certificate or ID card and keep copies", "If delayed, rejected or evicted without notice, complain to the Town Vending Committee and its grievance redressal committee"],
+      "url": "",
+      "kw": ["street vendor", "hawker", "vending", "eviction", "thela", "ठेला", "फेरीवाला", "হকার", "ফেরিওয়ালা", "evict", "bribe"],
+      "rules": {"segments_any": ["street_vendor", "grievance_eviction"], "skip_if_has": "vending_cert"}
+    },
+    {
+      "id": "pm_svanidhi", "name": "PM SVANidhi", "kind": "loan", "level": "Central - MoHUA", "priority": 1,
+      "desc": "Collateral-free working-capital loans for street vendors, with incentives for digital payments and timely repayment.",
+      "benefit": "Tiered working-capital loans (first tranche ₹15,000 under the restructured scheme; higher tranches on timely repayment). Confirm current limits on the portal.",
+      "eligibility": "Urban street vendors with a Certificate of Vending / ID card, or a Letter of Recommendation from the Urban Local Body.",
+      "docs": ["Aadhaar (mobile-linked)", "Certificate of Vending / ID card, or ULB Letter of Recommendation", "Bank account", "Passport photograph"],
+      "steps": ["Check your vendor survey / ID status with your Urban Local Body", "If you have no certificate, request a Letter of Recommendation from the ULB / Town Vending Committee", "Apply on the PM SVANidhi portal or through a Common Service Centre using Aadhaar eKYC", "Accept the loan from the participating bank / NBFC / MFI and repay on time to unlock the next tranche"],
+      "url": "https://pmsvanidhi.mohua.gov.in",
+      "kw": ["street vendor", "loan", "working capital", "svanidhi", "hawker", "लोन", "ठेला", "ঋণ", "ঠেলা"],
+      "rules": {"segments_any": ["street_vendor"]}
+    },
+    {
+      "id": "mudra", "name": "PM MUDRA Yojana", "kind": "loan", "level": "Central - via banks, NBFCs, MFIs", "priority": 2,
+      "desc": "Collateral-free loans for non-farm micro and small businesses in four bands: Shishu (up to ₹50,000), Kishor (₹50,001 to ₹5 lakh), Tarun (₹5 to ₹10 lakh) and Tarun Plus (up to ₹20 lakh).",
+      "benefit": "Loans up to ₹20 lakh without collateral for working capital or equipment.",
+      "eligibility": "Non-farm, non-corporate income-generating businesses: trading, manufacturing, services, food, artisan work.",
+      "docs": ["Identity and address proof", "Business proof (Udyam / licence / vending certificate where available)", "Bank statements", "Short business plan or quotation for equipment"],
+      "steps": ["Pick the band that matches your need", "Apply at a bank, NBFC or MFI, or through the Jan Samarth / MUDRA portal", "Submit KYC and business proof", "Track the application; no collateral is required for MUDRA loans"],
+      "url": "https://www.mudra.org.in",
+      "kw": ["mudra", "loan", "credit", "working capital", "business loan", "लोन", "कर्ज", "ঋণ", "লোন"],
+      "rules": {"segments_any": ["business"]}
+    },
+    {
+      "id": "cgtmse", "name": "CGTMSE Credit Guarantee", "kind": "loan_guarantee", "level": "Central - SIDBI / MSME", "priority": 3,
+      "desc": "Government-backed guarantee so banks can lend to micro and small enterprises without collateral or third-party guarantee.",
+      "benefit": "Collateral-free credit cover for eligible loans (cap is revised periodically; verify the current limit).",
+      "eligibility": "New or existing micro and small enterprises borrowing from a participating lender. Udyam registration is usually expected.",
+      "docs": ["Udyam certificate", "Loan application with the lender", "Business and financial statements"],
+      "steps": ["Register on Udyam", "Ask the bank for a loan under CGTMSE cover", "The lender applies for the guarantee; you do not file with CGTMSE yourself"],
+      "url": "https://www.cgtmse.in",
+      "kw": ["collateral", "guarantee", "bank loan", "credit", "cgtmse", "लोन", "ঋণ"],
+      "rules": {"segments_any": ["business"], "boost_if_loan": true}
+    },
+    {
+      "id": "pmegp", "name": "PMEGP (subsidy-linked loan for new units)", "kind": "subsidy", "level": "Central - KVIC / DIC", "priority": 2,
+      "desc": "Margin-money subsidy on bank loans for setting up new micro enterprises in manufacturing or services.",
+      "benefit": "Subsidy of roughly 15% to 35% of project cost depending on category and area; project cost ceiling ₹50 lakh (manufacturing) and ₹20 lakh (service).",
+      "eligibility": "New units only; age 18+; 8th pass for larger projects. Not for units that already got a subsidy under another scheme.",
+      "docs": ["Identity and address proof", "Project report", "Caste / special-category certificate if claiming higher subsidy", "Quotations, EDP training certificate (if required)"],
+      "steps": ["Prepare a project report", "Apply on the PMEGP e-portal and select a bank", "Attend the DIC / bank interview and training if asked", "After loan sanction the subsidy is credited to the bank account as margin money"],
+      "url": "https://www.kviconline.gov.in/pmegpeportal",
+      "kw": ["new unit", "subsidy", "manufacturing", "startup", "setup", "pmegp", "सब्सिडी", "নতুন", "ভর্তুকি"],
+      "rules": {"segments_any": ["manufacturing", "service", "food", "food_processing", "artisan"]}
+    },
+    {
+      "id": "stand_up_india", "name": "Stand-Up India", "kind": "loan", "level": "Central - SIDBI / banks", "priority": 3,
+      "desc": "Bank loans between ₹10 lakh and ₹1 crore for greenfield enterprises led by women or SC/ST entrepreneurs.",
+      "benefit": "One loan per bank branch for first-time enterprises in manufacturing, services or trading.",
+      "eligibility": "Women and/or SC/ST entrepreneurs, 18+, setting up a first (greenfield) enterprise.",
+      "docs": ["Identity and address proof", "Caste certificate (SC/ST applicants)", "Business plan / project report", "Udyam registration"],
+      "steps": ["Prepare a project report", "Apply through the Stand-Up Mitra portal or directly at a bank branch", "Submit KYC and category certificate", "Follow up with the lending branch"],
+      "url": "https://www.standupmitra.in",
+      "kw": ["women", "woman", "sc", "st", "greenfield", "महिला", "মহিলা", "নারী"],
+      "rules": {"segments_any": ["manufacturing", "service", "trader", "food", "food_processing"], "group_any": ["women", "sc_st"]}
+    },
+    {
+      "id": "pmfme", "name": "PM FME (micro food processing)", "kind": "subsidy", "level": "Central - MoFPI, state nodal agencies", "priority": 2,
+      "desc": "Credit-linked subsidy for upgrading or formalising micro food-processing units.",
+      "benefit": "35% credit-linked subsidy on eligible project cost, capped at ₹10 lakh per unit.",
+      "eligibility": "Existing individual micro food-processing units (pickle, papad, masala, bakery, flour, oil and similar).",
+      "docs": ["Identity proof", "Bank account", "Udyam / FSSAI / GST (as available)", "Detailed project report for the upgrade"],
+      "steps": ["Contact the District Resource Person or State Nodal Agency", "Prepare the project report for the upgrade", "Apply on the PM FME portal", "Bank sanctions the loan; subsidy is released against it"],
+      "url": "https://pmfme.mofpi.gov.in",
+      "kw": ["food processing", "pickle", "papad", "masala", "bakery", "namkeen", "अचार", "পাপড়"],
+      "rules": {"segments_any": ["food_processing"]}
+    },
+    {
+      "id": "pm_vishwakarma", "name": "PM Vishwakarma", "kind": "subsidy_loan", "level": "Central - MSME, MSDE, DFS", "priority": 2,
+      "desc": "Support for artisans and craftspeople in 18 traditional trades: recognition, skill training with stipend, toolkit incentive and low-interest credit.",
+      "benefit": "PM Vishwakarma certificate and ID, training stipend, toolkit incentive of ₹15,000, collateral-free credit starting at ₹1 lakh at a concessional rate.",
+      "eligibility": "Artisans in listed trades (carpenter, tailor, potter, blacksmith, goldsmith, cobbler, mason, barber, washerman, weaver and others), 18+.",
+      "docs": ["Aadhaar", "Mobile number linked to Aadhaar", "Bank account", "Trade proof / self-declaration"],
+      "steps": ["Register at a Common Service Centre or on the portal", "Complete Aadhaar-based biometric verification", "Verification by Gram Panchayat / ULB and district committee", "Receive certificate, training and toolkit, then apply for credit"],
+      "url": "https://pmvishwakarma.gov.in",
+      "kw": ["artisan", "carpenter", "tailor", "potter", "weaver", "cobbler", "blacksmith", "बढ़ई", "दर्जी", "কামার", "দর্জি"],
+      "rules": {"segments_any": ["artisan"]}
+    },
+    {
+      "id": "fssai", "name": "FSSAI Registration / Licence", "kind": "licence", "level": "Central - FSSAI (state food safety officers)", "priority": 1,
+      "desc": "Mandatory food-business authorisation. Basic registration for small operators; a State or Central licence for larger turnover.",
+      "benefit": "Legal permission to run a food business and display the FSSAI number on bills and premises.",
+      "eligibility": "All food businesses. Registration is for turnover up to ₹12 lakh a year; a licence is needed above that or for certain categories.",
+      "docs": ["Photo ID", "Passport photograph", "Proof of premises (rent agreement / ownership)", "List of food products", "Food safety management plan and layout (licence only)"],
+      "steps": ["Create an account on the FoSCoS portal", "Choose Registration or Licence based on turnover and category", "Upload documents and pay the fee", "Inspection if required, then download the certificate"],
+      "url": "https://foscos.fssai.gov.in",
+      "kw": ["food", "fssai", "restaurant", "tea", "bakery", "dhaba", "khana", "खाना", "चाय", "খাবার", "চা"],
+      "rules": {"segments_any": ["food", "food_processing"], "skip_if_has": "fssai"}
+    },
+    {
+      "id": "gst", "name": "GST Registration", "kind": "registration", "level": "Central / State - GSTN", "priority": 2,
+      "desc": "Tax registration. Mandatory above the turnover threshold, for inter-state supply of goods and for e-commerce sellers.",
+      "benefit": "Legal invoicing, input tax credit, ability to sell to larger buyers.",
+      "eligibility": "Mandatory above ₹40 lakh turnover for goods and ₹20 lakh for services (lower in some special-category states); voluntary below that unless inter-state or e-commerce.",
+      "docs": ["PAN", "Aadhaar", "Proof of business address", "Bank account proof", "Photograph"],
+      "steps": ["File Part A on the GST portal with PAN, mobile and email", "Complete Part B with business details and upload documents", "Aadhaar authentication", "Receive the ARN and then the GSTIN once approved"],
+      "url": "https://www.gst.gov.in",
+      "kw": ["gst", "tax", "invoice", "turnover", "जीएसटी", "জিএসটি"],
+      "rules": {"segments_any": ["business"], "turnover_min": 2000000, "skip_if_has": "gst"}
+    },
+    {
+      "id": "trade_license", "name": "Trade / Municipal Licence", "kind": "licence", "level": "Municipal corporation / municipality", "priority": 1,
+      "desc": "Local licence to operate a shop, eatery or workshop in your municipal area. Rules and fees are set by your municipality, so confirm locally.",
+      "benefit": "Legal premises operation; commonly asked for by banks and landlords.",
+      "eligibility": "Shops, eateries, workshops and service premises within a municipal area.",
+      "docs": ["Identity and address proof", "Proof of premises (rent agreement / ownership / NOC)", "Property tax receipt", "Photographs and any category-specific NOC"],
+      "steps": ["Find your municipal corporation's trade-licence portal or licence department (for example KMC in Kolkata)", "Submit the application with premises proof and fee", "Inspection if required", "Collect the licence and renew it before expiry"],
+      "url": "",
+      "kw": ["trade licence", "trade license", "municipal", "shop licence", "ট্রেড লাইসেন্স", "ट्रेड लाइसेंस"],
+      "rules": {"segments_any": ["trader", "food", "manufacturing", "service"], "skip_if_has": "trade_license"}
+    },
+    {
+      "id": "shops_establishment", "name": "Shops & Establishments Registration", "kind": "registration", "level": "State - Labour Department", "priority": 2,
+      "desc": "State registration covering working hours, holidays and employee rules for shops, offices and commercial establishments.",
+      "benefit": "State-law compliance for shops and establishments; commonly needed for bank accounts and licences.",
+      "eligibility": "Shops and commercial establishments, with thresholds that vary by state.",
+      "docs": ["Identity proof", "Proof of premises", "Employee details (if any)", "Photographs"],
+      "steps": ["Open your state labour department portal", "Fill the registration form with premises and employee details", "Upload documents and pay the fee", "Download the certificate"],
+      "url": "",
+      "kw": ["shop", "establishment", "labour", "employees", "दुकान", "দোকান"],
+      "rules": {"segments_any": ["trader", "food", "service"]}
+    },
+    {
+      "id": "msme_samadhaan", "name": "MSME Samadhaan (delayed payment)", "kind": "grievance", "level": "Central - Ministry of MSME", "priority": 1,
+      "desc": "Online filing for delayed payments by buyers. Under the MSMED Act, 2006, buyers must pay within the agreed time (at most 45 days). Unpaid amounts carry compound interest at three times the RBI bank rate, with monthly rests.",
+      "benefit": "Reference to the Micro and Small Enterprises Facilitation Council for conciliation and arbitration.",
+      "eligibility": "Micro and small suppliers with Udyam registration owed money for goods or services.",
+      "docs": ["Udyam certificate", "Invoices, purchase order, delivery proof", "Written demand / reminders sent", "Bank statement showing non-payment"],
+      "steps": ["Send a written demand notice citing Sections 15 and 16 of the MSMED Act", "If unpaid, file on the MSME Samadhaan portal with invoices and proof", "Attend conciliation before the Facilitation Council (Section 18)", "If conciliation fails, the Council arbitrates or refers to an institution for arbitration"],
+      "url": "https://samadhaan.msme.gov.in",
+      "kw": ["unpaid", "payment", "delayed", "invoice", "dues", "buyer", "बकाया", "भुगतान", "বকেয়া", "পেমেন্ট"],
+      "rules": {"segments_any": ["grievance_payment"]}
+    },
+    {
+      "id": "cpgrams", "name": "CPGRAMS (public grievances)", "kind": "grievance", "level": "Central - DARPG", "priority": 1,
+      "desc": "Central portal to lodge complaints against central and state government departments, with tracking and appeal.",
+      "benefit": "Registered grievance with a tracking number and a defined redress timeline.",
+      "eligibility": "Any citizen with a grievance about public service delivery.",
+      "docs": ["Details of the grievance and department", "Supporting documents or application numbers", "Mobile number / email"],
+      "steps": ["Open the CPGRAMS portal and register", "Select the ministry or department and describe the issue", "Attach documents and submit", "Track status and use the appeal option if unsatisfied"],
+      "url": "https://pgportal.gov.in",
+      "kw": ["grievance", "complaint", "pension", "certificate", "pending", "corruption", "शिकायत", "অভিযোগ"],
+      "rules": {"segments_any": ["grievance_govt"]}
+    },
+    {
+      "id": "consumer_helpline", "name": "National Consumer Helpline / e-Daakhil", "kind": "grievance", "level": "Central - Dept. of Consumer Affairs", "priority": 1,
+      "desc": "Pre-litigation mediation through the helpline (1915) and online filing of consumer cases through e-Daakhil.",
+      "benefit": "Refund / replacement / compensation route for defective goods, deficient services and unfair practices.",
+      "eligibility": "Consumers who bought goods or services from a seller or provider.",
+      "docs": ["Bill / invoice", "Communication with seller", "Photos of the defect", "Legal notice (recommended before filing)"],
+      "steps": ["Call 1915 or register the complaint on the consumer helpline portal", "Send the seller a written notice with a deadline", "If unresolved, file a consumer complaint online through e-Daakhil in the right commission", "Attend hearings or mediation"],
+      "url": "https://consumerhelpline.gov.in",
+      "kw": ["refund", "defective", "consumer", "cheated", "fraud", "warranty", "ग्राहक", "ভোক্তা"],
+      "rules": {"segments_any": ["grievance_consumer"]}
+    }
+  ]
+}
