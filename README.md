@@ -3,6 +3,8 @@
 
 > **Understand the law. Follow the story. Know your rights.**
 
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-NyayaMitra-FF9933?style=for-the-badge)](https://nyayamitra-agent.onrender.com/)
+
 NyayaMitra is an editorial-style legal intelligence platform designed to make
 complex Indian legal information easier to understand, explore, and act upon.
 
