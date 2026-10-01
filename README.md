@@ -1,5 +1,5 @@
 # NyayaMitra-Agent
-<<<<<<< HEAD
+
 
 Multi-agent assistant for Indian MSMEs, street vendors and citizens: checks documents, matches government
 schemes and compliance duties, and drafts forms and letters. Built for the BharatAgentic Hackathon
