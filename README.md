@@ -1,32 +1,36 @@
 # ⚖️ NyayaMitra — न्यायमित्र
+
 ### Editorial Legal Intelligence for India
 
 > **Understand the law. Follow the story. Know your rights.**
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-NyayaMitra-FF9933?style=for-the-badge)](https://nyayamitra-agent.onrender.com/)
-
-NyayaMitra is an editorial-style legal intelligence platform designed to make
-complex Indian legal information easier to understand, explore, and act upon.
-
-Instead of presenting legal information as dense documents, NyayaMitra
-organizes it into structured stages — helping users move from a legal issue
-to relevant laws, schemes, explanations, action steps, and ready-to-use drafts.
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Deployment](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=flat-square)](https://render.com/)
 
 ---
 
-## ✦ Why NyayaMitra?
+## 🚀 Live Demo
 
-Legal information can be difficult to navigate.
+### [→ Open NyayaMitra](https://nyayamitra-agent.onrender.com/)
 
-Users may encounter:
+Experience the deployed NyayaMitra application directly in your browser.
 
-- Complicated legal terminology
-- Long government documents
-- Scattered information across multiple sources
-- Difficulty identifying applicable schemes or provisions
-- Uncertainty about what action to take next
+**No installation required.**
 
-**NyayaMitra turns this information into an editorial workflow.**
+---
+
+## ✦ Overview
+
+**NyayaMitra (न्यायमित्र)** is an editorial-style legal intelligence platform
+designed to make complex Indian legal and civic information easier to
+understand, explore, and act upon.
+
+Legal information is often distributed across lengthy documents, complicated
+terminology, government portals, and disconnected resources.
+
+NyayaMitra aims to transform this experience into a structured workflow:
 
 ```text
 LEGAL ISSUE
@@ -35,8 +39,10 @@ UNDERSTAND
      ↓
 ANALYSE
      ↓
-DISCOVER RELEVANT LAWS & SCHEMES
+DISCOVER RELEVANT INFORMATION
      ↓
-PLAN NEXT STEPS
+EXPLORE SCHEMES & RESOURCES
+     ↓
+BUILD AN ACTION ROADMAP
      ↓
 GENERATE USEFUL DRAFTS
