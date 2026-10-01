@@ -1,401 +1,3043 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NyayaMitra — न्यायमित्र | Editorial Legal Intelligence</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #070B14;
-    --surface: rgba(13, 20, 36, 0.82);
-    --surface-bright: #1E2942;
-    --ink: #F1F5F9;
-    --mute: #94A3B8;
-    --line: rgba(51, 65, 85, 0.6);
-    --accent: #F97316; /* Saffron Editorial Accent */
-    --accent-blue: #38BDF8;
-    --ok: #34D399;
-    --warn: #FBBF24;
-    --bad: #F87171;
-  }
-  
-  html, body {
-    background-color: var(--bg);
-    color: var(--ink);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  /* Taj Mahal Immersive Background with Editorial Overlay */
-  .taj-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(7, 11, 20, 0.78), rgba(7, 11, 20, 0.94)), 
-                      url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=2000&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: -1;
-  }
+  <title>NyayaMitra — न्यायमित्र | Legal Intelligence for Bharat</title>
 
-  .font-editorial {
-    font-family: 'Playfair Display', serif;
-  }
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  /* Floating Glassmorphic Editorial Cards */
-  .editorial-card {
-    background: var(--surface);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 
-                0 0 1px 1px rgba(255, 255, 255, 0.04) inset;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .editorial-card:hover {
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), 
-                0 0 1px 1px rgba(249, 115, 22, 0.2) inset;
-  }
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-  .editorial-input {
-    background: rgba(7, 11, 20, 0.6);
-    border: 1px solid var(--line);
-    color: var(--ink);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
-  .editorial-input:focus {
-    border-color: var(--accent);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
-  }
+  <style>
 
-  .editorial-btn {
-    background: var(--ink);
-    color: var(--bg);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-  }
-  .editorial-btn:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4);
-  }
+    /* =========================================================
+       NYAYAMITRA
+       INDIA × LAW × TECHNOLOGY
+       EDITORIAL DESIGN SYSTEM
+       ========================================================= */
 
-  .chip-editorial {
-    border: 1px solid var(--line);
-    background: rgba(30, 41, 66, 0.5);
-    backdrop-filter: blur(8px);
-    color: var(--ink);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    padding: 0.25rem 0.85rem;
-    transition: all 0.2s;
-  }
-  .chip-editorial:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(249, 115, 22, 0.05);
-  }
+    :root {
+      --ink: #171411;
+      --ink-soft: #342e27;
 
-  .badge-editorial {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    padding: 0.15rem 0.5rem;
-    border: 1px solid currentColor;
-    border-radius: 2px;
-  }
+      --paper: #f1eadc;
+      --paper-bright: #faf7ef;
+      --paper-dark: #ded4c2;
 
-  /* Stage Timeline */
-  .stage { border-left: 2px solid var(--line); padding-left: 1.5rem; margin-left: 0.5rem; position: relative; padding-bottom: 1.25rem; }
-  .stage.active { border-color: var(--accent); }
-  .stage.done { border-color: var(--ok); }
-  .stage .dot { position: absolute; left: -7px; top: 0; width: 12px; height: 12px; background: var(--line); border-radius: 50%; }
-  .stage.active .dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-  .stage.done .dot { background: var(--ok); }
+      --saffron: #e56b18;
+      --saffron-dark: #b94d0b;
 
-  .tab-editorial {
-    border-bottom: 2px solid transparent;
-    color: var(--mute);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    transition: all 0.2s;
-  }
-  .tab-editorial[aria-selected=true] {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: rgba(249, 115, 22, 0.08);
-  }
-</style>
-</head>
-<body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white relative overflow-x-hidden">
+      --green: #176b4d;
+      --blue: #155a78;
 
-<!-- Immersive Taj Mahal Background Layer -->
-<div class="taj-bg"></div>
+      --muted: #756c61;
 
-<!-- Editorial Top Bar / Tricolor Line -->
-<div class="h-1.5 w-full bg-gradient-to-r from-orange-500 via-white to-emerald-600 relative z-50"></div>
+      --line: rgba(23, 20, 17, 0.18);
 
-<header class="border-b border-slate-800/80 bg-[#070B14]/80 backdrop-blur-xl sticky top-0 z-40 px-6 py-4">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-    <div>
-      <div class="flex items-center space-x-3">
-        <span class="text-orange-500 font-mono text-sm tracking-widest">[ 01 / VOL. 2026 ]</span>
-        <span class="text-slate-600">|</span>
-        <span class="text-emerald-400 text-xs tracking-wider uppercase font-semibold">Sovereign Legal Framework</span>
-      </div>
-      <h1 class="text-3xl md:text-4xl font-editorial font-extrabold tracking-tight mt-1 text-white">
-        NyayaMitra <span class="text-orange-500 font-sans text-2xl ml-1">न्यायमित्र</span>
-      </h1>
-    </div>
-    <div class="flex items-center space-x-6 text-xs font-mono bg-[#0D1424]/90 border border-slate-800 px-4 py-2.5 rounded shadow-xl">
-      <div class="flex items-center text-emerald-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span>
-        PAN-INDIA GRID ACTIVE
-      </div>
-      <span class="text-slate-600">/</span>
-      <div class="text-orange-400 font-bold">
-        LEGAL AID: 15100
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- Hero Manifesto / Storytelling Intro -->
-<section class="max-w-7xl mx-auto px-6 pt-12 pb-6 relative z-10">
-  <div class="grid lg:grid-cols-12 gap-8 items-end border-b border-slate-800/80 pb-10">
-    <div class="lg:col-span-8 space-y-4">
-      <span class="text-orange-500 font-mono text-xs uppercase tracking-widest block">— Autonomous Legal Architecture</span>
-      <p class="text-2xl md:text-4xl font-editorial font-semibold leading-snug text-slate-100">
-        Bridging the chasm between <span class="italic text-orange-400 font-serif">grassroots rights</span> and sovereign institutional machinery across Bharat.
-      </p>
-    </div>
-    <div class="lg:col-span-4 text-slate-300 text-sm leading-relaxed border-l-2 border-orange-500/50 pl-4 bg-[#070B14]/40 backdrop-blur-md p-3 rounded-r">
-      Feed your grievance, business situation, or documentation below. Our decentralized agent cluster parses, validates against central statutes, and drafts legal instruments in real-time.
-    </div>
-  </div>
-</section>
-
-<!-- Main Workspace Grid -->
-<main class="max-w-7xl mx-auto px-6 py-8 grid gap-8 lg:grid-cols-12 flex-grow w-full relative z-10">
-  
-  <!-- Left Floating Column: Input Box -->
-  <section class="lg:col-span-5 editorial-card p-6 space-y-6 h-fit lg:sticky lg:top-24">
-    <div class="space-y-2">
-      <label for="text" class="block font-mono text-xs uppercase tracking-wider text-orange-400 font-semibold">
-        01. State Your Case or Grievance
-      </label>
-      <textarea id="text" rows="7" class="editorial-input w-full p-4 text-sm leading-relaxed" placeholder="e.g., I run a tea stall near Howrah station with 3 lakh annual sales. I require micro-credit linkage and trade license compliance..."></textarea>
-    </div>
-
-    <div>
-      <span class="font-mono text-xs uppercase tracking-widest text-slate-400 block mb-2">Preset Perspectives</span>
-      <div id="examples" class="flex flex-wrap gap-2"></div>
-    </div>
-
-    <div class="border-t border-slate-800 pt-4">
-      <label for="file" class="block font-mono text-xs uppercase tracking-wider text-orange-400 font-semibold mb-2">
-        02. Attach Artifact (Optional)
-      </label>
-      <input id="file" type="file" accept="image/*,.pdf,.txt" class="block text-xs w-full file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-[#1E2942] file:text-orange-400 hover:file:bg-slate-800 cursor-pointer text-slate-400">
-    </div>
-
-    <button id="run" class="editorial-btn w-full py-4 text-sm shadow-2xl tracking-widest">
-      Initialize Agent Swarm &rarr;
-    </button>
-
-    <div class="text-[11px] font-mono text-slate-400 text-center border-t border-slate-800 pt-3">
-      🔒 Zero Persistent Storage · Dynamic Cryptographic Masking Active
-    </div>
-  </section>
-
-  <!-- Right Floating Column: Results & Live Editorial Workflow Trace -->
-  <section class="lg:col-span-7 min-w-0 space-y-6">
-    
-    <!-- Trace Panel -->
-    <div id="trace" class="editorial-card p-6 hidden" aria-live="polite">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
-        <h2 class="font-mono text-xs uppercase tracking-widest text-orange-400 font-bold flex items-center space-x-2">
-          <span class="w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>
-          <span>Live Swarm Execution Trace</span>
-        </h2>
-        <span class="text-xs font-mono text-slate-400">Multimodal Pipeline</span>
-      </div>
-      <div id="stages" class="space-y-4"></div>
-    </div>
-
-    <!-- Error State -->
-    <div id="error" class="editorial-card p-4 bad hidden bg-red-950/40 border-red-900/60 text-red-300 font-mono text-xs shadow-xl" role="alert"></div>
-
-    <!-- Results Container -->
-    <div id="results" class="editorial-card hidden overflow-hidden shadow-2xl">
-      <div role="tablist" id="tabs" class="flex flex-wrap border-b border-slate-800 bg-[#070B14]/50 px-4"></div>
-      <div id="tabbody" class="p-6"></div>
-    </div>
-
-    <!-- Empty State -->
-    <div id="empty" class="editorial-card p-16 text-center space-y-4">
-      <span class="font-editorial italic text-3xl text-slate-400 block">"Awaiting Input Vector"</span>
-      <p class="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-        Select a preset prompt on the left or compose your narrative statement to trigger the multi-agent legal reasoning core.
-      </p>
-    </div>
-
-  </section>
-</main>
-
-<script>
-const EXAMPLES = [
-  ["Tea stall (EN)", "I run a tea stall on a handcart near Howrah station, Kolkata. Annual sales are around ₹3,00,000. I have no licence and need a small loan. I am a woman and have 1 helper."],
-  ["ठेला (हिंदी)", "मैं दिल्ली में ठेले पर सब्ज़ी बेचता हूँ। मुझे कोई लाइसेंस नहीं है और कारोबार के लिए छोटा लोन चाहिए। नगर निगम वाले बार-बार ठेला हटा देते हैं।"],
-  ["খাবারের দোকান (বাংলা)", "আমি কলকাতায় একটি ছোট খাবারের দোকান চালাই। বছরে প্রায় ১৫ লাখ টাকার বিক্রি। উদ্যম রেজিস্ট্রেশন আর FSSAI লাইসেন্স দরকার।"],
-  ["Unpaid invoice", "A buyer in Pune owes my small manufacturing unit ₹2,50,000 for goods supplied. Invoice dated 12/05/2026. We have Udyam UDYAM-MH-26-0012345 and 9 employees. Draft a notice."],
-  ["Check my documents", "Please check my documents. Udyam: UDYAM-WB-10-0004567, GSTIN: 19ABCDE1234F1Z5, PAN ABCDE1234F, FSSAI 12345678901234. I run a bakery in Kolkata, turnover 25 lakh."]
-];
-const STAGES = [["understand","Understand Query"],["reason","Legal Reasoning"],["plan","Scheme Matching"],["tools","Tool Verification"],["act","Drafting Paperwork"],["deliver","Final Report"]];
-const $ = id => document.getElementById(id);
-const el = (t, c, ...kids) => { const e = document.createElement(t); if (c) e.className = c; for (const k of kids) if (k != null && k !== false) e.append(k.nodeType ? k : document.createTextNode(k)); return e; };
-const STATUS = {likely_eligible:["Likely Eligible","text-emerald-400"], check_eligibility:["Check Eligibility","text-amber-400"], already_have:["Already Have","text-sky-400"], valid_format:["Format Valid","text-emerald-400"], invalid:["Invalid","text-red-400"], expired:["Expired","text-red-400"]};
-const badge = s => { const [t,c] = STATUS[s] || [s,"text-sky-400"]; return el("span", `badge-editorial ${c}`, t); };
-const rupee = v => v == null ? null : "₹" + Number(v).toLocaleString("en-IN");
-const copy = (txt, btn) => navigator.clipboard.writeText(txt).then(() => { const o = btn.textContent; btn.textContent = "[ COPIED ]"; setTimeout(() => btn.textContent = o, 1400); });
-
-EXAMPLES.forEach(([label, text]) => { const b = el("button", "chip-editorial", label); b.type = "button"; b.onclick = () => $("text").value = text; $("examples").append(b); });
-
-let stageEls = {}, current = null;
-function resetTrace() {
-  $("stages").replaceChildren(); stageEls = {}; current = null;
-  STAGES.forEach(([k, label]) => { const body = el("div", "mt-2 space-y-1 text-xs font-mono text-slate-300"); const s = el("div", "stage", el("span", "dot"), el("div", "font-bold text-slate-200 text-sm tracking-wide font-editorial", label), body); stageEls[k] = {s, body}; $("stages").append(s); });
-  $("trace").classList.remove("hidden"); $("results").classList.add("hidden"); $("error").classList.add("hidden"); $("empty").classList.add("hidden");
-}
-function activate(stage) {
-  if (current === stage) return;
-  if (current) stageEls[current].s.classList.replace("active", "done");
-  current = stage; stageEls[stage].s.classList.add("active");
-}
-function pretty(v) { return typeof v === "string" ? v : JSON.stringify(v, null, 2); }
-function onEvent(ev) {
-  if (ev.type === "error") { $("error").textContent = ev.message; $("error").classList.remove("hidden"); return; }
-  if (ev.type === "final") { if (current) stageEls[current].s.classList.replace("active", "done"); renderResult(ev.result); return; }
-  activate(ev.stage);
-  const body = stageEls[ev.stage].body;
-  if (ev.type === "step") {
-    body.append(el("div", "flex items-start space-x-2", el("span", "text-orange-500", "—"), el("div", "", el("span", "text-slate-200 font-semibold", ev.agent + ": "), el("span", "text-slate-300", ev.title), ev.detail ? el("span", "block text-[11px] text-slate-400", ev.detail) : null)));
-  } else if (ev.type === "tool") {
-    const d = el("details", "text-xs mt-2 bg-[#070B14]/90 p-3 rounded border border-slate-800", el("summary", "font-mono text-sky-400 cursor-pointer font-bold", "⚙ TOOL: ", ev.tool, el("span", "text-slate-400 font-normal", " (" + ev.agent + ")")),
-      el("pre", "font-mono text-[11px] text-slate-300 mt-2 p-1 overflow-x-auto", "input: " + pretty(ev.input) + "\noutput: " + pretty(ev.output)));
-    body.append(d);
-  }
-}
-
-async function run() {
-  const text = $("text").value.trim(), file = $("file").files[0];
-  if (!text && !file) { resetTrace(); onEvent({type:"error", message:"Error: Please enter a situation narrative or upload an artifact."}); return; }
-  resetTrace(); $("run").disabled = true; $("run").textContent = "Executing Swarm…";
-  const fd = new FormData(); fd.append("text", text); if (file) fd.append("file", file);
-  try {
-    const res = await fetch("/api/run", {method: "POST", body: fd});
-    const reader = res.body.getReader(), dec = new TextDecoder(); let buf = "";
-    while (true) {
-      const {value, done} = await reader.read(); if (done) break;
-      buf += dec.decode(value, {stream: true}); let i;
-      while ((i = buf.indexOf("\n\n")) >= 0) { const chunk = buf.slice(0, i); buf = buf.slice(i + 2); if (chunk.startsWith("data: ")) onEvent(JSON.parse(chunk.slice(6))); }
+      --night: #11110f;
+      --night-soft: #1c1a17;
     }
-  } catch (e) { onEvent({type:"error", message:"Network error connecting to agent core: " + e.message}); }
-  $("run").disabled = false; $("run").textContent = "Initialize Agent Swarm →";
-}
-$("run").onclick = run;
 
-function renderResult(r) {
-  const tabs = {
-    summary: ["01. Summary", () => viewSummary(r)],
-    documents: [`02. Documents (${r.documents.length})`, () => viewDocs(r)],
-    schemes: [`03. Schemes (${r.schemes.length})`, () => viewSchemes(r)],
-    roadmap: ["04. Action Plan", () => viewRoadmap(r)],
-    drafts: [`05. Forms & Letters (${r.forms.length + r.letters.length})`, () => viewDrafts(r)]
-  };
-  $("tabs").replaceChildren();
-  const show = k => { [...$("tabs").children].forEach(b => b.setAttribute("aria-selected", b.dataset.k === k)); $("tabbody").replaceChildren(tabs[k][1]()); };
-  Object.entries(tabs).forEach(([k, [label]]) => { const b = el("button", "tab-editorial px-4 py-3", label); b.type = "button"; b.role = "tab"; b.dataset.k = k; b.onclick = () => show(k); $("tabs").append(b); });
-  $("results").classList.remove("hidden"); show("summary");
-  $("results").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion:reduce)").matches ? "auto" : "smooth", block: "start"});
-}
 
-function viewSummary(r) {
-  const p = r.profile, chips = [];
-  p.segments.filter(s => s !== "business").forEach(s => chips.push(s.replace(/_/g, " ")));
-  if (p.state) chips.push(p.state); if (p.turnover) chips.push("Turnover: " + rupee(p.turnover)); if (p.employees != null) chips.push(p.employees + " Employee(s)");
-  const root = el("div", "space-y-6", el("p", "text-xl font-editorial font-medium leading-relaxed text-slate-100", r.summary),
-    el("div", "flex flex-wrap gap-2", ...chips.map(c => el("span", "chip-editorial font-mono text-xs", c))));
-  if (r.needs.length) root.append(el("div", "space-y-2 border-t border-slate-800 pt-4", el("div", "font-mono text-xs uppercase tracking-widest text-orange-400 font-bold", "— Identified Strategic Needs"), el("ul", "space-y-2 text-sm text-slate-200 list-disc pl-5", ...r.needs.map(n => el("li", "", n)))));
-  if (r.assumptions.length) root.append(el("div", "space-y-2 bg-[#1E2942]/50 backdrop-blur p-4 rounded border border-amber-500/30", el("div", "font-mono text-xs uppercase tracking-widest text-amber-400 font-bold", "⚠️ Systematic Assumptions"), el("ul", "space-y-1 text-xs text-slate-300 list-disc pl-5", ...r.assumptions.map(n => el("li", "", n)))));
-  if (r.already_done.length) root.append(el("p", "font-mono text-xs text-slate-300 bg-[#070B14]/80 p-3 rounded border border-slate-800", "✓ Already Verified: " + r.already_done.join(", ")));
-  root.append(el("p", "font-mono text-[11px] text-slate-400 italic pt-2 border-t border-slate-800", r.disclaimer));
-  return root;
-}
-function viewDocs(r) {
-  if (!r.documents.length) return el("p", "font-mono text-xs text-slate-400", "No identity registry numbers indexed.");
-  return el("div", "space-y-4", ...r.documents.map(d => el("div", "border border-slate-800 rounded-lg p-4 bg-[#070B14]/60 backdrop-blur space-y-3 shadow-md",
-    el("div", "flex flex-wrap items-center justify-between gap-2", el("div", "flex items-center space-x-3", el("span", "font-editorial font-bold text-lg text-white", d.type), el("code", "font-mono text-xs bg-[#1E2942] px-2 py-0.5 rounded text-sky-400", d.value)), badge(d.status)),
-    el("ul", "space-y-1 font-mono text-xs", ...d.checks.map(c => el("li", c.ok ? "text-emerald-400" : "text-red-400", (c.ok ? "[✓] PASS: " : "[✕] FAIL: ") + c.name))),
-    d.extracted ? el("p", "font-mono text-xs text-slate-300 pt-2 border-t border-slate-800", Object.entries(d.extracted).filter(([,v]) => v).map(([k,v]) => k.replace(/_/g," ") + ": " + v).join(" · ")) : null,
-    el("p", "font-mono text-[11px] text-slate-400 italic", d.note))));
-}
-function viewSchemes(r) {
-  if (!r.schemes.length) return el("p", "font-mono text-xs text-slate-400", "No welfare schemes matched.");
-  return el("div", "space-y-4", ...r.schemes.map(s => el("div", "border border-slate-800 rounded-lg p-4 bg-[#070B14]/60 backdrop-blur space-y-3 shadow-md",
-    el("div", "flex flex-wrap items-center justify-between gap-2", el("span", "font-editorial font-bold text-lg text-white", s.name), badge(s.status)),
-    el("div", "font-mono text-xs uppercase tracking-widest text-sky-400 font-semibold", s.level), el("p", "text-sm text-slate-200 leading-relaxed", s.desc),
-    el("p", "text-sm text-slate-100", el("b", "text-orange-400 font-mono text-xs uppercase tracking-wider block mb-1", "Sovereign Benefit: "), s.benefit),
-    s.reasons.length ? el("ul", "font-mono text-xs text-emerald-400 list-disc pl-5 space-y-1", ...s.reasons.map(x => el("li", "", x))) : null,
-    s.missing.length ? el("ul", "font-mono text-xs text-amber-400 list-disc pl-5 space-y-1", ...s.missing.map(x => el("li", "", "Missing Requirement: " + x))) : null,
-    s.url ? (() => { const a = el("a", "font-mono text-xs text-sky-400 underline font-bold inline-block pt-2", "↗ Official Scheme Portal"); a.href = s.url; a.target = "_blank"; a.rel = "noopener"; return a; })() : null)));
-}
-function viewRoadmap(r) {
-  if (!r.roadmap.length) return el("p", "font-mono text-xs text-slate-400", "No roadmap generated.");
-  const root = el("div", "space-y-6");
-  ["Do first", "Next", "When you are ready"].forEach(ph => {
-    const items = r.roadmap.filter(x => x.phase === ph); if (!items.length) return;
-    root.append(el("div", "", el("h3", "font-mono text-xs uppercase tracking-widest text-orange-400 font-bold mb-3", "— Phase: " + ph), ...items.map(it => el("div", "border border-slate-800 rounded-lg p-4 mb-3 bg-[#070B14]/60 backdrop-blur space-y-3 shadow-md",
-      el("div", "font-editorial font-bold text-base text-white", it.name),
-      el("ol", "list-decimal pl-5 text-sm text-slate-200 space-y-1 font-sans", ...it.steps.map(s => el("li", "", s))),
-      el("div", "font-mono text-xs text-slate-300 bg-[#1E2942]/60 p-2 rounded", "Required Paperwork: " + it.docs.join("; ")),
-      it.url ? (() => { const a = el("a", "font-mono text-xs text-sky-400 underline font-bold inline-block", "↗ Access Gateway"); a.href = it.url; a.target = "_blank"; a.rel = "noopener"; return a; })() : null))));
-  });
-  if (r.documents_needed.length) root.append(el("div", "p-4 border border-slate-800 rounded-lg bg-[#0D1424]/90 backdrop-blur shadow-md", el("h3", "font-mono text-xs uppercase tracking-widest text-orange-400 font-bold mb-2", "— Master Document Checklist"), el("ul", "list-disc pl-5 font-mono text-xs text-slate-200 space-y-1", ...r.documents_needed.map(d => el("li", "", d)))));
-  return root;
-}
-function viewDrafts(r) {
-  const root = el("div", "space-y-6");
-  if (!r.forms.length && !r.letters.length) return el("p", "font-mono text-xs text-slate-400", "No legal drafts required.");
-  r.forms.forEach(f => {
-    const rows = Object.entries(f.fields).map(([k, v]) => el("tr", "border-t border-slate-800", el("td", "py-2 pr-3 font-mono text-xs text-slate-300", k), el("td", "py-2 font-mono text-xs " + (String(v).includes("<<") ? "text-amber-400 font-bold" : "text-slate-100"), String(v))));
-    const b = el("button", "chip-editorial font-mono text-xs", "[ COPY JSON ]"); b.type = "button"; b.onclick = () => copy(JSON.stringify(f.fields, null, 2), b);
-    root.append(el("div", "border border-slate-800 rounded-lg p-4 space-y-3 bg-[#070B14]/60 backdrop-blur shadow-md", el("div", "flex items-center justify-between gap-2", el("h3", "font-editorial font-bold text-base text-white", f.title), b),
-      el("div", "overflow-x-auto", el("table", "w-full", ...rows)), el("p", "font-mono text-[11px] text-slate-400 italic", "Fields enclosed in <<brackets>> require user data insertion prior to gateway submission: " + f.portal)));
-  });
-  r.letters.forEach(l => {
-    const b = el("button", "chip-editorial font-mono text-xs", "[ COPY DRAFT ]"); b.type = "button"; b.onclick = () => copy(l.body, b);
-    root.append(el("div", "border border-slate-800 rounded-lg p-4 space-y-3 bg-[#070B14]/60 backdrop-blur shadow-md", el("div", "flex items-center justify-between gap-2", el("h3", "font-editorial font-bold text-base text-white", l.title), b),
-      el("pre", "border border-slate-800 rounded p-3 font-mono text-xs text-slate-200 bg-[#070B14]/90")));
-    if (l.body_local) { const b2 = el("button", "chip-editorial font-mono text-xs", "[ COPY LOCAL ]"); b2.type = "button"; b2.onclick = () => copy(l.body_local, b2);
-      root.append(el("div", "border border-slate-800 rounded-lg p-4 space-y-3 bg-[#070B14]/60 backdrop-blur shadow-md", el("div", "flex items-center justify-between gap-2", el("h4", "font-editorial font-bold text-sm text-white", l.local_language + " Sovereign Draft"), b2), el("pre", "border border-slate-800 rounded p-3 font-mono text-xs text-slate-200 bg-[#070B14]/90"))); }
-  });
-  return root;
-}
-</script>
+    /* =========================================================
+       BASE
+       ========================================================= */
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(229, 107, 24, 0.06),
+          transparent 30%
+        ),
+        var(--paper);
+
+      color: var(--ink);
+
+      font-family: 'Plus Jakarta Sans', sans-serif;
+
+      -webkit-font-smoothing: antialiased;
+
+      overflow-x: hidden;
+    }
+
+
+    /* subtle paper grain */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.035;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.35'/%3E%3C/svg%3E");
+
+      z-index: 9999;
+    }
+
+
+    /* =========================================================
+       TYPOGRAPHY
+       ========================================================= */
+
+    .font-editorial {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .font-sans {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .font-mono {
+      font-family: 'DM Mono', monospace;
+    }
+
+    .font-devanagari {
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      letter-spacing: -0.035em;
+    }
+
+
+    /* =========================================================
+       INDIA / TAJ MAHAL BACKGROUND
+       ========================================================= */
+
+    .taj-bg {
+      position: fixed;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100vh;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(241, 234, 220, 0.98) 0%,
+          rgba(241, 234, 220, 0.94) 35%,
+          rgba(241, 234, 220, 0.76) 62%,
+          rgba(17, 17, 15, 0.72) 100%
+        ),
+        url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=2200&q=85');
+
+      background-size: cover;
+
+      background-position: center;
+
+      background-attachment: fixed;
+
+      filter:
+        saturate(0.72)
+        contrast(1.05);
+
+      z-index: -2;
+    }
+
+
+    /* =========================================================
+       TOP TRICOLOR STRIPE
+       ========================================================= */
+
+    .tricolor-bar {
+      height: 5px;
+
+      width: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #e86f18 0%,
+          #e86f18 33.33%,
+          #faf7ef 33.33%,
+          #faf7ef 66.66%,
+          #176b4d 66.66%,
+          #176b4d 100%
+        );
+
+      position: relative;
+
+      z-index: 50;
+    }
+
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .site-header {
+      background: rgba(241, 234, 220, 0.88);
+
+      border-bottom: 1px solid var(--line);
+
+      backdrop-filter: blur(14px);
+
+      -webkit-backdrop-filter: blur(14px);
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 40;
+    }
+
+    .masthead-title {
+      color: var(--ink);
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+
+      line-height: 0.82;
+
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+    }
+
+    .masthead-devanagari {
+      color: var(--saffron);
+
+      font-family: 'Hind Siliguri', sans-serif;
+
+      font-size: 0.4em;
+
+      letter-spacing: 0;
+    }
+
+    .status-panel {
+      background: var(--ink);
+
+      color: var(--paper);
+
+      border: 1px solid var(--ink);
+
+      box-shadow:
+        5px 5px 0 rgba(23, 20, 17, 0.12);
+    }
+
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero-section {
+      padding-top: clamp(4rem, 8vw, 8rem);
+
+      padding-bottom: 3rem;
+    }
+
+    .hero-label {
+      color: var(--saffron);
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 0.7rem;
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      color: var(--ink);
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: clamp(4rem, 9vw, 9rem);
+
+      font-weight: 800;
+
+      line-height: 0.86;
+
+      letter-spacing: -0.065em;
+    }
+
+    .hero-title .accent {
+      color: var(--saffron);
+
+      font-style: italic;
+    }
+
+    .hero-devanagari {
+      color: var(--ink-soft);
+
+      font-family: 'Hind Siliguri', sans-serif;
+
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+
+      letter-spacing: 0;
+    }
+
+    .hero-description {
+      color: var(--ink-soft);
+
+      font-size: 0.9rem;
+
+      line-height: 1.9;
+    }
+
+    .hero-rule {
+      width: 70px;
+
+      height: 1px;
+
+      background: var(--ink);
+    }
+
+
+    /* =========================================================
+       MANIFESTO STRIP
+       ========================================================= */
+
+    .manifesto {
+      border-top: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+
+      padding: 1.25rem 0;
+    }
+
+    .manifesto-number {
+      color: var(--saffron);
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 0.65rem;
+
+      letter-spacing: 0.15em;
+    }
+
+    .manifesto-title {
+      color: var(--ink);
+
+      font-family: 'Playfair Display', serif;
+
+      font-size: 1.15rem;
+
+      line-height: 1.2;
+    }
+
+
+    /* =========================================================
+       EDITORIAL CARDS
+       ========================================================= */
+
+    .editorial-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(250, 247, 239, 0.97),
+          rgba(231, 222, 207, 0.95)
+        );
+
+      color: var(--ink);
+
+      border: 1px solid var(--line);
+
+      border-radius: 0;
+
+      box-shadow:
+        12px 12px 0 rgba(23, 20, 17, 0.08);
+
+      backdrop-filter: blur(8px);
+
+      -webkit-backdrop-filter: blur(8px);
+
+      transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+    }
+
+    .editorial-card:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        16px 16px 0 rgba(23, 20, 17, 0.10);
+    }
+
+
+    /* =========================================================
+       INPUT
+       ========================================================= */
+
+    .editorial-input {
+      background: rgba(255, 252, 245, 0.92);
+
+      color: var(--ink);
+
+      border: 1px solid var(--line);
+
+      border-radius: 0;
+
+      font-family: 'Plus Jakarta Sans', sans-serif;
+
+      line-height: 1.7;
+
+      transition:
+        border-color 200ms ease,
+        box-shadow 200ms ease;
+    }
+
+    .editorial-input::placeholder {
+      color: #91877b;
+    }
+
+    .editorial-input:focus {
+      border-color: var(--saffron);
+
+      outline: none;
+
+      box-shadow:
+        5px 5px 0 rgba(229, 107, 24, 0.12);
+    }
+
+
+    /* =========================================================
+       BUTTON
+       ========================================================= */
+
+    .editorial-btn {
+      background: var(--ink);
+
+      color: var(--paper);
+
+      border-radius: 0;
+
+      border: 1px solid var(--ink);
+
+      font-family: 'DM Mono', monospace;
+
+      font-weight: 500;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+
+      min-height: 58px;
+
+      transition:
+        background 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .editorial-btn:hover {
+      background: var(--saffron);
+
+      border-color: var(--saffron);
+
+      color: white;
+
+      transform: translate(-2px, -2px);
+
+      box-shadow:
+        6px 6px 0 rgba(23, 20, 17, 0.18);
+    }
+
+    .editorial-btn:disabled {
+      opacity: 0.65;
+
+      cursor: wait;
+
+      transform: none;
+
+      box-shadow: none;
+    }
+
+
+    /* =========================================================
+       CHIPS
+       ========================================================= */
+
+    .chip-editorial {
+      border: 1px solid var(--line);
+
+      background: transparent;
+
+      color: var(--ink);
+
+      border-radius: 0;
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 0.68rem;
+
+      padding: 0.45rem 0.8rem;
+
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease;
+    }
+
+    .chip-editorial:hover {
+      background: var(--ink);
+
+      border-color: var(--ink);
+
+      color: var(--paper);
+    }
+
+
+    /* =========================================================
+       BADGES
+       ========================================================= */
+
+    .badge-editorial {
+      border-radius: 0;
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 0.62rem;
+
+      letter-spacing: 0.08em;
+
+      padding: 0.25rem 0.5rem;
+    }
+
+
+    /* =========================================================
+       TIMELINE
+       ========================================================= */
+
+    .stage {
+      border-left: 1px solid var(--line);
+
+      padding-left: 1.6rem;
+
+      margin-left: 0.5rem;
+
+      position: relative;
+
+      padding-bottom: 1.5rem;
+    }
+
+    .stage.active {
+      border-color: var(--saffron);
+    }
+
+    .stage.done {
+      border-color: var(--green);
+    }
+
+    .stage .dot {
+      position: absolute;
+
+      left: -6px;
+
+      top: 0;
+
+      width: 11px;
+
+      height: 11px;
+
+      background: var(--paper-dark);
+
+      border: 2px solid var(--paper);
+
+      border-radius: 50%;
+    }
+
+    .stage.active .dot {
+      background: var(--saffron);
+
+      box-shadow:
+        0 0 0 4px rgba(229, 107, 24, 0.12);
+    }
+
+    .stage.done .dot {
+      background: var(--green);
+    }
+
+
+    /* =========================================================
+       TABS
+       ========================================================= */
+
+    .tab-editorial {
+      border-bottom: 2px solid transparent;
+
+      color: var(--muted);
+
+      background: transparent;
+
+      font-family: 'DM Mono', monospace;
+
+      font-weight: 500;
+
+      font-size: 0.68rem;
+
+      letter-spacing: 0.08em;
+
+      padding: 1rem;
+
+      transition: all 180ms ease;
+    }
+
+    .tab-editorial:hover {
+      color: var(--ink);
+    }
+
+    .tab-editorial[aria-selected="true"] {
+      color: var(--ink);
+
+      border-color: var(--saffron);
+
+      background: rgba(229, 107, 24, 0.08);
+    }
+
+
+    /* =========================================================
+       RESULT AREA
+       ========================================================= */
+
+    #results {
+      background: rgba(250, 247, 239, 0.97);
+
+      border-radius: 0;
+    }
+
+    #results .text-slate-100,
+    #results .text-slate-200,
+    #results .text-slate-300 {
+      color: var(--ink-soft) !important;
+    }
+
+    #results .text-slate-400 {
+      color: var(--muted) !important;
+    }
+
+
+    /* =========================================================
+       EMPTY STATE
+       ========================================================= */
+
+    #empty {
+      min-height: 430px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    #empty::before {
+      content: "न्याय";
+
+      position: absolute;
+
+      font-family: 'Hind Siliguri', sans-serif;
+
+      font-size: clamp(9rem, 22vw, 19rem);
+
+      font-weight: 700;
+
+      color: rgba(23, 20, 17, 0.035);
+
+      right: -2rem;
+
+      bottom: -5rem;
+
+      pointer-events: none;
+    }
+
+    #empty .font-editorial {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+      color: var(--ink) !important;
+
+      letter-spacing: -0.06em;
+    }
+
+
+    /* =========================================================
+       ERROR
+       ========================================================= */
+
+    #error {
+      border-radius: 0;
+
+      background: rgba(127, 29, 29, 0.08) !important;
+
+      border-color: rgba(127, 29, 29, 0.35) !important;
+
+      color: #991b1b !important;
+    }
+
+
+    /* =========================================================
+       FILE INPUT
+       ========================================================= */
+
+    input[type="file"] {
+      color: var(--muted);
+    }
+
+    input[type="file"]::file-selector-button {
+      background: var(--ink);
+
+      color: var(--paper);
+
+      border: none;
+
+      padding: 0.6rem 1rem;
+
+      margin-right: 0.75rem;
+
+      font-family: 'DM Mono', monospace;
+
+      font-size: 0.65rem;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 768px) {
+
+      .masthead-title {
+        font-size: 3rem;
+      }
+
+      .hero-section {
+        padding-top: 3rem;
+      }
+
+      .hero-title {
+        font-size: 4.2rem;
+      }
+
+      .editorial-card {
+        box-shadow:
+          6px 6px 0 rgba(23, 20, 17, 0.08);
+      }
+
+      .editorial-card:hover {
+        transform: none;
+
+        box-shadow:
+          6px 6px 0 rgba(23, 20, 17, 0.08);
+      }
+    }
+
+
+    /* =========================================================
+       ACCESSIBILITY
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+
+        animation-duration: 0.01ms !important;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+
+  <!-- =======================================================
+       BACKGROUND
+       ======================================================= -->
+
+  <div class="taj-bg"></div>
+
+
+  <!-- =======================================================
+       TRICOLOR TOP RULE
+       ======================================================= -->
+
+  <div class="tricolor-bar"></div>
+
+
+  <!-- =======================================================
+       HEADER / MASTHEAD
+       ======================================================= -->
+
+  <header class="site-header px-6 py-5">
+
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+
+      <div>
+
+        <div class="flex items-center gap-3 mb-3">
+
+          <span class="text-orange-600 font-mono text-xs tracking-widest">
+            [ 01 / VOL. 2026 ]
+          </span>
+
+          <span class="text-stone-400">
+            |
+          </span>
+
+          <span class="text-emerald-700 text-[10px] tracking-[0.16em] uppercase font-semibold">
+            Sovereign Legal Intelligence
+          </span>
+
+        </div>
+
+
+        <div class="masthead-title">
+
+          NyayaMitra
+
+          <span class="masthead-devanagari">
+            न्यायमित्र
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="status-panel px-5 py-3 flex items-center gap-5 text-[10px] font-mono">
+
+        <div class="flex items-center text-emerald-300">
+
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
+
+          PAN-INDIA GRID ACTIVE
+
+        </div>
+
+        <span class="text-stone-600">
+          /
+        </span>
+
+        <div class="text-orange-300 font-bold">
+          LEGAL AID: 15100
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       HERO / EDITORIAL MANIFESTO
+       ======================================================= -->
+
+  <section class="hero-section max-w-7xl mx-auto px-6 relative z-10">
+
+    <div class="grid lg:grid-cols-12 gap-8 items-end">
+
+
+      <!-- ISSUE NUMBER -->
+
+      <div class="lg:col-span-2 hidden lg:block">
+
+        <div class="font-mono text-[10px] tracking-widest text-stone-500">
+
+          ISSUE
+
+          <div class="text-6xl font-editorial text-stone-900 leading-none mt-1">
+            01
+          </div>
+
+        </div>
+
+        <div class="mt-10 h-28 w-px bg-stone-900/20"></div>
+
+      </div>
+
+
+      <!-- MAIN HEADLINE -->
+
+      <div class="lg:col-span-8">
+
+        <div class="hero-label mb-6">
+          — Autonomous Legal Architecture
+        </div>
+
+
+        <h1 class="hero-title">
+
+          Justice
+
+          <br>
+
+          <span class="accent">
+            within reach.
+          </span>
+
+        </h1>
+
+
+        <div class="mt-9 flex items-center gap-4">
+
+          <span class="hero-rule"></span>
+
+          <span class="hero-devanagari">
+            न्यायमित्र
+          </span>
+
+          <span class="font-mono text-[10px] uppercase tracking-widest text-stone-500">
+            NyayaMitra
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- DESCRIPTION -->
+
+      <div class="lg:col-span-2">
+
+        <p class="hero-description">
+
+          A multilingual legal intelligence system
+          designed for India's citizens,
+          entrepreneurs and communities.
+
+        </p>
+
+
+        <div class="mt-7 pt-4 border-t border-stone-900/20">
+
+          <div class="font-mono text-[9px] uppercase tracking-[0.18em] text-stone-500">
+            Built for Bharat
+          </div>
+
+          <div class="font-devanagari text-lg mt-1 text-stone-800">
+            अधिकार · सहायता · समाधान
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- MANIFESTO -->
+
+    <div class="manifesto mt-16">
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div>
+
+          <div class="manifesto-number">
+            01 / UNDERSTAND
+          </div>
+
+          <div class="manifesto-title mt-2">
+            Your story becomes structured.
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="manifesto-number">
+            02 / REASON
+          </div>
+
+          <div class="manifesto-title mt-2">
+            Law meets context.
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="manifesto-number">
+            03 / ACT
+          </div>
+
+          <div class="manifesto-title mt-2">
+            Knowledge becomes action.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN WORKSPACE
+       ======================================================= -->
+
+  <main
+    class="max-w-7xl mx-auto px-6 py-10 grid gap-10 lg:grid-cols-12 flex-grow w-full relative z-10"
+  >
+
+
+    <!-- =====================================================
+         LEFT — INPUT
+         ===================================================== -->
+
+    <section class="lg:col-span-5 editorial-card p-7 space-y-7 h-fit lg:sticky lg:top-28">
+
+
+      <!-- Section marker -->
+
+      <div class="flex items-center justify-between border-b border-stone-900/15 pb-4">
+
+        <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-stone-500">
+          Citizen Interface
+        </div>
+
+        <div class="font-editorial italic text-lg text-stone-400">
+          01
+        </div>
+
+      </div>
+
+
+      <!-- Narrative -->
+
+      <div class="space-y-3">
+
+        <label
+          for="text"
+          class="block font-mono text-xs uppercase tracking-wider text-orange-600 font-semibold"
+        >
+          State Your Case or Grievance
+        </label>
+
+
+        <textarea
+          id="text"
+          rows="8"
+          class="editorial-input w-full p-4 text-sm leading-relaxed"
+          placeholder="Tell us what happened. Describe your business, grievance, documents, problem or situation in your own words..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- Presets -->
+
+      <div>
+
+        <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-stone-500 block mb-3">
+          Preset Perspectives
+        </span>
+
+        <div id="examples" class="flex flex-wrap gap-2"></div>
+
+      </div>
+
+
+      <!-- File -->
+
+      <div class="border-t border-stone-900/15 pt-5">
+
+        <label
+          for="file"
+          class="block font-mono text-xs uppercase tracking-wider text-orange-600 font-semibold mb-3"
+        >
+          02. Attach Artifact — Optional
+        </label>
+
+
+        <input
+          id="file"
+          type="file"
+          accept="image/*,.pdf,.txt"
+          class="block text-xs w-full cursor-pointer"
+        >
+
+      </div>
+
+
+      <!-- Button -->
+
+      <button
+        id="run"
+        class="editorial-btn w-full py-4 text-sm shadow-xl tracking-widest"
+      >
+        Initialize Agent Swarm →
+      </button>
+
+
+      <!-- Privacy -->
+
+      <div class="text-[10px] font-mono text-stone-500 text-center border-t border-stone-900/15 pt-4">
+
+        🔒 ZERO PERSISTENT STORAGE
+        ·
+        DYNAMIC CRYPTOGRAPHIC MASKING ACTIVE
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RIGHT — RESULTS
+         ===================================================== -->
+
+    <section class="lg:col-span-7 min-w-0 space-y-7">
+
+
+      <!-- ===================================================
+           LIVE TRACE
+           =================================================== -->
+
+      <div
+        id="trace"
+        class="editorial-card p-7 hidden"
+        aria-live="polite"
+      >
+
+        <div class="flex items-center justify-between border-b border-stone-900/15 pb-5 mb-7">
+
+          <h2 class="font-mono text-xs uppercase tracking-widest text-orange-600 font-bold flex items-center gap-2">
+
+            <span class="w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>
+
+            Live Swarm Execution Trace
+
+          </h2>
+
+
+          <span class="text-[10px] font-mono text-stone-500">
+            MULTIMODAL PIPELINE
+          </span>
+
+        </div>
+
+
+        <div id="stages" class="space-y-4"></div>
+
+      </div>
+
+
+      <!-- ===================================================
+           ERROR
+           =================================================== -->
+
+      <div
+        id="error"
+        class="editorial-card p-5 hidden font-mono text-xs shadow-xl"
+        role="alert"
+      ></div>
+
+
+      <!-- ===================================================
+           RESULTS
+           =================================================== -->
+
+      <div
+        id="results"
+        class="editorial-card hidden overflow-hidden shadow-2xl"
+      >
+
+        <div
+          role="tablist"
+          id="tabs"
+          class="flex flex-wrap border-b border-stone-900/15 bg-[#f1eadc]/70 px-4"
+        ></div>
+
+
+        <div
+          id="tabbody"
+          class="p-7"
+        ></div>
+
+      </div>
+
+
+      <!-- ===================================================
+           EMPTY STATE
+           =================================================== -->
+
+      <div
+        id="empty"
+        class="editorial-card p-16 text-center space-y-5"
+      >
+
+        <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-orange-600">
+          Awaiting Narrative
+        </div>
+
+
+        <span class="font-editorial italic block">
+          "Tell us your story."
+        </span>
+
+
+        <p class="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
+
+          Select a preset prompt on the left or compose
+          your own narrative statement to activate the
+          multi-agent legal reasoning core.
+
+        </p>
+
+
+        <div class="font-devanagari text-2xl text-stone-400 pt-3">
+          आपकी बात · आपका अधिकार
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+  <script>
+
+    /* =========================================================
+       PRESET EXAMPLES
+       ========================================================= */
+
+    const EXAMPLES = [
+
+      [
+        "Tea stall · EN",
+        "I run a tea stall on a handcart near Howrah station, Kolkata. Annual sales are around ₹3,00,000. I have no licence and need a small loan. I am a woman and have 1 helper."
+      ],
+
+      [
+        "ठेला · हिंदी",
+        "मैं दिल्ली में ठेले पर सब्ज़ी बेचता हूँ। मुझे कोई लाइसेंस नहीं है और कारोबार के लिए छोटा लोन चाहिए। नगर निगम वाले बार-बार ठेला हटा देते हैं।"
+      ],
+
+      [
+        "খাবারের দোকান · বাংলা",
+        "আমি কলকাতায় একটি ছোট খাবারের দোকান চালাই। বছরে প্রায় ১৫ লাখ টাকার বিক্রি। উদ্যম রেজিস্ট্রেশন আর FSSAI লাইসেন্স দরকার।"
+      ],
+
+      [
+        "Unpaid invoice",
+        "A buyer in Pune owes my small manufacturing unit ₹2,50,000 for goods supplied. Invoice dated 12/05/2026. We have Udyam UDYAM-MH-26-0012345 and 9 employees. Draft a notice."
+      ],
+
+      [
+        "Check my documents",
+        "Please check my documents. Udyam: UDYAM-WB-10-0004567, GSTIN: 19ABCDE1234F1Z5, PAN ABCDE1234F, FSSAI 12345678901234. I run a bakery in Kolkata, turnover 25 lakh."
+      ]
+
+    ];
+
+
+    /* =========================================================
+       PIPELINE STAGES
+       ========================================================= */
+
+    const STAGES = [
+
+      ["understand", "Understand Query"],
+
+      ["reason", "Legal Reasoning"],
+
+      ["plan", "Scheme Matching"],
+
+      ["tools", "Tool Verification"],
+
+      ["act", "Drafting Paperwork"],
+
+      ["deliver", "Final Report"]
+
+    ];
+
+
+    /* =========================================================
+       HELPERS
+       ========================================================= */
+
+    const $ = id => document.getElementById(id);
+
+
+    const el = (t, c, ...kids) => {
+
+      const e = document.createElement(t);
+
+      if (c) e.className = c;
+
+      for (const k of kids) {
+
+        if (
+          k != null &&
+          k !== false
+        ) {
+
+          e.append(
+            k.nodeType
+              ? k
+              : document.createTextNode(k)
+          );
+
+        }
+
+      }
+
+      return e;
+
+    };
+
+
+    const STATUS = {
+
+      likely_eligible: [
+        "Likely Eligible",
+        "text-emerald-700"
+      ],
+
+      check_eligibility: [
+        "Check Eligibility",
+        "text-amber-700"
+      ],
+
+      already_have: [
+        "Already Have",
+        "text-sky-700"
+      ],
+
+      valid_format: [
+        "Format Valid",
+        "text-emerald-700"
+      ],
+
+      invalid: [
+        "Invalid",
+        "text-red-700"
+      ],
+
+      expired: [
+        "Expired",
+        "text-red-700"
+      ]
+
+    };
+
+
+    const badge = s => {
+
+      const [
+        t,
+        c
+      ] = STATUS[s] || [
+        s,
+        "text-sky-700"
+      ];
+
+      return el(
+        "span",
+        `badge-editorial ${c}`,
+        t
+      );
+
+    };
+
+
+    const rupee = v =>
+      v == null
+        ? null
+        : "₹" + Number(v).toLocaleString("en-IN");
+
+
+    const copy = (txt, btn) =>
+
+      navigator.clipboard
+        .writeText(txt)
+        .then(() => {
+
+          const original = btn.textContent;
+
+          btn.textContent = "[ COPIED ]";
+
+          setTimeout(
+            () => btn.textContent = original,
+            1400
+          );
+
+        });
+
+
+    /* =========================================================
+       PRESET BUTTONS
+       ========================================================= */
+
+    EXAMPLES.forEach(
+      ([label, text]) => {
+
+        const b = el(
+          "button",
+          "chip-editorial",
+          label
+        );
+
+        b.type = "button";
+
+        b.onclick = () => {
+
+          $("text").value = text;
+
+          $("text").focus();
+
+        };
+
+        $("examples").append(b);
+
+      }
+    );
+
+
+    /* =========================================================
+       TRACE STATE
+       ========================================================= */
+
+    let stageEls = {};
+
+    let current = null;
+
+
+    function resetTrace() {
+
+      $("stages").replaceChildren();
+
+      stageEls = {};
+
+      current = null;
+
+
+      STAGES.forEach(
+        ([k, label]) => {
+
+          const body = el(
+            "div",
+            "mt-2 space-y-2 text-xs font-mono text-stone-600"
+          );
+
+
+          const s = el(
+
+            "div",
+
+            "stage",
+
+            el("span", "dot"),
+
+            el(
+              "div",
+              "font-bold text-stone-900 text-sm tracking-wide font-editorial",
+              label
+            ),
+
+            body
+
+          );
+
+
+          stageEls[k] = {
+            s,
+            body
+          };
+
+
+          $("stages").append(s);
+
+        }
+      );
+
+
+      $("trace").classList.remove("hidden");
+
+      $("results").classList.add("hidden");
+
+      $("error").classList.add("hidden");
+
+      $("empty").classList.add("hidden");
+
+    }
+
+
+    function activate(stage) {
+
+      if (current === stage) return;
+
+
+      if (current) {
+
+        stageEls[current]
+          .s
+          .classList
+          .replace(
+            "active",
+            "done"
+          );
+
+      }
+
+
+      current = stage;
+
+      stageEls[stage]
+        .s
+        .classList
+        .add("active");
+
+    }
+
+
+    function pretty(v) {
+
+      return typeof v === "string"
+        ? v
+        : JSON.stringify(
+            v,
+            null,
+            2
+          );
+
+    }
+
+
+    /* =========================================================
+       STREAM EVENTS
+       ========================================================= */
+
+    function onEvent(ev) {
+
+      if (ev.type === "error") {
+
+        $("error").textContent =
+          ev.message;
+
+        $("error")
+          .classList
+          .remove("hidden");
+
+        return;
+
+      }
+
+
+      if (ev.type === "final") {
+
+        if (current) {
+
+          stageEls[current]
+            .s
+            .classList
+            .replace(
+              "active",
+              "done"
+            );
+
+        }
+
+        renderResult(ev.result);
+
+        return;
+
+      }
+
+
+      activate(ev.stage);
+
+
+      const body =
+        stageEls[ev.stage].body;
+
+
+      if (ev.type === "step") {
+
+        body.append(
+
+          el(
+
+            "div",
+
+            "flex items-start space-x-2",
+
+            el(
+              "span",
+              "text-orange-600",
+              "—"
+            ),
+
+            el(
+
+              "div",
+
+              "",
+
+              el(
+                "span",
+                "text-stone-900 font-semibold",
+                ev.agent + ": "
+              ),
+
+              el(
+                "span",
+                "text-stone-600",
+                ev.title
+              ),
+
+              ev.detail
+                ? el(
+                    "span",
+                    "block text-[11px] text-stone-500 mt-1",
+                    ev.detail
+                  )
+                : null
+
+            )
+
+          )
+
+        );
+
+      }
+
+
+      else if (ev.type === "tool") {
+
+        const d = el(
+
+          "details",
+
+          "text-xs mt-2 bg-[#faf7ef] p-3 rounded-none border border-stone-300",
+
+          el(
+
+            "summary",
+
+            "font-mono text-sky-700 cursor-pointer font-bold",
+
+            "⚙ TOOL: ",
+
+            ev.tool,
+
+            el(
+              "span",
+              "text-stone-500 font-normal",
+              " (" + ev.agent + ")"
+            )
+
+          ),
+
+          el(
+
+            "pre",
+
+            "font-mono text-[11px] text-stone-600 mt-2 p-1 overflow-x-auto whitespace-pre-wrap",
+
+            "input: " +
+            pretty(ev.input) +
+            "\noutput: " +
+            pretty(ev.output)
+
+          )
+
+        );
+
+
+        body.append(d);
+
+      }
+
+    }
+
+
+    /* =========================================================
+       RUN AGENT
+       ========================================================= */
+
+    async function run() {
+
+      const text =
+        $("text").value.trim();
+
+      const file =
+        $("file").files[0];
+
+
+      if (!text && !file) {
+
+        resetTrace();
+
+        onEvent({
+
+          type: "error",
+
+          message:
+            "Please enter a situation narrative or upload an artifact."
+
+        });
+
+        return;
+
+      }
+
+
+      resetTrace();
+
+
+      $("run").disabled = true;
+
+      $("run").textContent =
+        "Executing Swarm…";
+
+
+      const fd =
+        new FormData();
+
+
+      fd.append(
+        "text",
+        text
+      );
+
+
+      if (file) {
+
+        fd.append(
+          "file",
+          file
+        );
+
+      }
+
+
+      try {
+
+        const res =
+          await fetch(
+            "/api/run",
+            {
+              method: "POST",
+              body: fd
+            }
+          );
+
+
+        if (!res.ok) {
+
+          throw new Error(
+            `Server returned ${res.status}`
+          );
+
+        }
+
+
+        const reader =
+          res.body.getReader();
+
+
+        const dec =
+          new TextDecoder();
+
+
+        let buf = "";
+
+
+        while (true) {
+
+          const {
+            value,
+            done
+          } =
+            await reader.read();
+
+
+          if (done) break;
+
+
+          buf +=
+            dec.decode(
+              value,
+              {
+                stream: true
+              }
+            );
+
+
+          let i;
+
+
+          while (
+            (i = buf.indexOf("\n\n")) >= 0
+          ) {
+
+            const chunk =
+              buf.slice(
+                0,
+                i
+              );
+
+
+            buf =
+              buf.slice(
+                i + 2
+              );
+
+
+            if (
+              chunk.startsWith("data: ")
+            ) {
+
+              onEvent(
+                JSON.parse(
+                  chunk.slice(6)
+                )
+              );
+
+            }
+
+          }
+
+        }
+
+      }
+
+      catch (e) {
+
+        onEvent({
+
+          type: "error",
+
+          message:
+            "Network error connecting to agent core: " +
+            e.message
+
+        });
+
+      }
+
+
+      $("run").disabled = false;
+
+      $("run").textContent =
+        "Initialize Agent Swarm →";
+
+    }
+
+
+    $("run").onclick = run;
+
+
+    /* =========================================================
+       RESULT TABS
+       ========================================================= */
+
+    function renderResult(r) {
+
+      const tabs = {
+
+        summary: [
+          "01. Summary",
+          () => viewSummary(r)
+        ],
+
+        documents: [
+          `02. Documents (${r.documents.length})`,
+          () => viewDocs(r)
+        ],
+
+        schemes: [
+          `03. Schemes (${r.schemes.length})`,
+          () => viewSchemes(r)
+        ],
+
+        roadmap: [
+          "04. Action Plan",
+          () => viewRoadmap(r)
+        ],
+
+        drafts: [
+          `05. Forms & Letters (${r.forms.length + r.letters.length})`,
+          () => viewDrafts(r)
+        ]
+
+      };
+
+
+      $("tabs").replaceChildren();
+
+
+      const show = k => {
+
+        [
+          ...$("tabs").children
+        ].forEach(
+          b =>
+            b.setAttribute(
+              "aria-selected",
+              b.dataset.k === k
+            )
+        );
+
+
+        $("tabbody")
+          .replaceChildren(
+            tabs[k][1]()
+          );
+
+      };
+
+
+      Object.entries(tabs)
+        .forEach(
+          ([k, [label]]) => {
+
+            const b = el(
+              "button",
+              "tab-editorial px-4 py-3",
+              label
+            );
+
+
+            b.type = "button";
+
+            b.role = "tab";
+
+            b.dataset.k = k;
+
+            b.onclick = () =>
+              show(k);
+
+
+            $("tabs").append(b);
+
+          }
+        );
+
+
+      $("results")
+        .classList
+        .remove("hidden");
+
+
+      show("summary");
+
+
+      $("results")
+        .scrollIntoView({
+
+          behavior:
+            matchMedia(
+              "(prefers-reduced-motion:reduce)"
+            ).matches
+              ? "auto"
+              : "smooth",
+
+          block: "start"
+
+        });
+
+    }
+
+
+    /* =========================================================
+       SUMMARY
+       ========================================================= */
+
+    function viewSummary(r) {
+
+      const p = r.profile;
+
+      const chips = [];
+
+
+      p.segments
+        .filter(
+          s => s !== "business"
+        )
+        .forEach(
+          s =>
+            chips.push(
+              s.replace(
+                /_/g,
+                " "
+              )
+            )
+        );
+
+
+      if (p.state)
+        chips.push(
+          p.state
+        );
+
+
+      if (p.turnover)
+        chips.push(
+          "Turnover: " +
+          rupee(p.turnover)
+        );
+
+
+      if (p.employees != null)
+        chips.push(
+          p.employees +
+          " Employee(s)"
+        );
+
+
+      const root = el(
+
+        "div",
+
+        "space-y-6",
+
+        el(
+
+          "div",
+
+          "border-l-4 border-orange-500 pl-5",
+
+          el(
+            "p",
+            "text-2xl font-editorial font-medium leading-relaxed text-stone-900",
+            r.summary
+          )
+
+        ),
+
+        el(
+
+          "div",
+
+          "flex flex-wrap gap-2",
+
+          ...chips.map(
+            c =>
+              el(
+                "span",
+                "chip-editorial font-mono text-xs",
+                c
+              )
+          )
+
+        )
+
+      );
+
+
+      if (r.needs.length) {
+
+        root.append(
+
+          el(
+
+            "div",
+
+            "space-y-2 border-t border-stone-900/15 pt-5",
+
+            el(
+              "div",
+              "font-mono text-xs uppercase tracking-widest text-orange-600 font-bold",
+              "— Identified Strategic Needs"
+            ),
+
+            el(
+
+              "ul",
+
+              "space-y-2 text-sm text-stone-700 list-disc pl-5",
+
+              ...r.needs.map(
+                n =>
+                  el(
+                    "li",
+                    "",
+                    n
+                  )
+              )
+
+            )
+
+          )
+
+        );
+
+      }
+
+
+      if (r.assumptions.length) {
+
+        root.append(
+
+          el(
+
+            "div",
+
+            "space-y-2 bg-amber-50/70 p-4 rounded-none border border-amber-500/30",
+
+            el(
+              "div",
+              "font-mono text-xs uppercase tracking-widest text-amber-700 font-bold",
+              "⚠ Systematic Assumptions"
+            ),
+
+            el(
+
+              "ul",
+
+              "space-y-1 text-xs text-stone-600 list-disc pl-5",
+
+              ...r.assumptions.map(
+                n =>
+                  el(
+                    "li",
+                    "",
+                    n
+                  )
+              )
+
+            )
+
+          )
+
+        );
+
+      }
+
+
+      if (r.already_done.length) {
+
+        root.append(
+
+          el(
+
+            "p",
+
+            "font-mono text-xs text-stone-600 bg-stone-100 p-3 rounded-none border border-stone-300",
+
+            "✓ Already Verified: " +
+            r.already_done.join(", ")
+
+          )
+
+        );
+
+      }
+
+
+      root.append(
+
+        el(
+
+          "p",
+
+          "font-mono text-[11px] text-stone-500 italic pt-3 border-t border-stone-900/15",
+
+          r.disclaimer
+
+        )
+
+      );
+
+
+      return root;
+
+    }
+
+
+    /* =========================================================
+       DOCUMENTS
+       ========================================================= */
+
+    function viewDocs(r) {
+
+      if (!r.documents.length) {
+
+        return el(
+
+          "p",
+
+          "font-mono text-xs text-stone-500",
+
+          "No identity registry numbers indexed."
+
+        );
+
+      }
+
+
+      return el(
+
+        "div",
+
+        "space-y-4",
+
+        ...r.documents.map(
+
+          d =>
+
+            el(
+
+              "div",
+
+              "border border-stone-300 rounded-none p-5 bg-[#faf7ef]/80 space-y-4 shadow-sm",
+
+              el(
+
+                "div",
+
+                "flex flex-wrap items-center justify-between gap-2",
+
+                el(
+
+                  "div",
+
+                  "flex items-center space-x-3",
+
+                  el(
+                    "span",
+                    "font-editorial font-bold text-xl text-stone-900",
+                    d.type
+                  ),
+
+                  el(
+                    "code",
+                    "font-mono text-xs bg-stone-200 px-2 py-1 rounded-none text-sky-700",
+                    d.value
+                  )
+
+                ),
+
+                badge(d.status)
+
+              ),
+
+
+              el(
+
+                "ul",
+
+                "space-y-1 font-mono text-xs",
+
+                ...d.checks.map(
+
+                  c =>
+
+                    el(
+
+                      "li",
+
+                      c.ok
+                        ? "text-emerald-700"
+                        : "text-red-700",
+
+                      (
+                        c.ok
+                          ? "[✓] PASS: "
+                          : "[✕] FAIL: "
+                      ) +
+                      c.name
+
+                    )
+
+                )
+
+              ),
+
+
+              d.extracted
+
+                ? el(
+
+                    "p",
+
+                    "font-mono text-xs text-stone-600 pt-3 border-t border-stone-300",
+
+                    Object.entries(
+                      d.extracted
+                    )
+                      .filter(
+                        ([, v]) => v
+                      )
+                      .map(
+                        ([k, v]) =>
+                          k.replace(
+                            /_/g,
+                            " "
+                          ) +
+                          ": " +
+                          v
+                      )
+                      .join(" · ")
+
+                  )
+
+                : null,
+
+
+              el(
+
+                "p",
+
+                "font-mono text-[11px] text-stone-500 italic",
+
+                d.note
+
+              )
+
+            )
+
+        )
+
+      );
+
+    }
+
+
+    /* =========================================================
+       SCHEMES
+       ========================================================= */
+
+    function viewSchemes(r) {
+
+      if (!r.schemes.length) {
+
+        return el(
+
+          "p",
+
+          "font-mono text-xs text-stone-500",
+
+          "No welfare schemes matched."
+
+        );
+
+      }
+
+
+      return el(
+
+        "div",
+
+        "space-y-4",
+
+        ...r.schemes.map(
+
+          s =>
+
+            el(
+
+              "div",
+
+              "border border-stone-300 rounded-none p-5 bg-[#faf7ef]/80 space-y-4 shadow-sm",
+
+              el(
+
+                "div",
+
+                "flex flex-wrap items-center justify-between gap-2",
+
+                el(
+                  "span",
+                  "font-editorial font-bold text-xl text-stone-900",
+                  s.name
+                ),
+
+                badge(s.status)
+
+              ),
+
+
+              el(
+
+                "div",
+
+                "font-mono text-xs uppercase tracking-widest text-sky-700 font-semibold",
+
+                s.level
+
+              ),
+
+
+              el(
+
+                "p",
+
+                "text-sm text-stone-700 leading-relaxed",
+
+                s.desc
+
+              ),
+
+
+              el(
+
+                "p",
+
+                "text-sm text-stone-800",
+
+                el(
+                  "b",
+                  "text-orange-600 font-mono text-xs uppercase tracking-wider block mb-1",
+                  "Benefit: "
+                ),
+
+                s.benefit
+
+              ),
+
+
+              s.reasons.length
+
+                ? el(
+
+                    "ul",
+
+                    "font-mono text-xs text-emerald-700 list-disc pl-5 space-y-1",
+
+                    ...s.reasons.map(
+                      x =>
+                        el(
+                          "li",
+                          "",
+                          x
+                        )
+                    )
+
+                  )
+
+                : null,
+
+
+              s.missing.length
+
+                ? el(
+
+                    "ul",
+
+                    "font-mono text-xs text-amber-700 list-disc pl-5 space-y-1",
+
+                    ...s.missing.map(
+                      x =>
+                        el(
+                          "li",
+                          "",
+                          "Missing Requirement: " +
+                          x
+                        )
+                    )
+
+                  )
+
+                : null,
+
+
+              s.url
+
+                ? (() => {
+
+                    const a = el(
+
+                      "a",
+
+                      "font-mono text-xs text-sky-700 underline font-bold inline-block pt-2",
+
+                      "↗ Official Scheme Portal"
+
+                    );
+
+                    a.href = s.url;
+
+                    a.target = "_blank";
+
+                    a.rel = "noopener noreferrer";
+
+                    return a;
+
+                  })()
+
+                : null
+
+            )
+
+        )
+
+      );
+
+    }
+
+
+    /* =========================================================
+       ROADMAP
+       ========================================================= */
+
+    function viewRoadmap(r) {
+
+      if (!r.roadmap.length) {
+
+        return el(
+
+          "p",
+
+          "font-mono text-xs text-stone-500",
+
+          "No roadmap generated."
+
+        );
+
+      }
+
+
+      const root =
+        el(
+          "div",
+          "space-y-7"
+        );
+
+
+      [
+        "Do first",
+        "Next",
+        "When you are ready"
+      ]
+      .forEach(
+
+        ph => {
+
+          const items =
+            r.roadmap.filter(
+              x => x.phase === ph
+            );
+
+
+          if (!items.length)
+            return;
+
+
+          root.append(
+
+            el(
+
+              "div",
+
+              "",
+
+              el(
+
+                "h3",
+
+                "font-mono text-xs uppercase tracking-widest text-orange-600 font-bold mb-4",
+
+                "— Phase: " +
+                ph
+
+              ),
+
+
+              ...items.map(
+
+                it =>
+
+                  el(
+
+                    "div",
+
+                    "border border-stone-300 rounded-none p-5 mb-4 bg-[#faf7ef]/80 space-y-4 shadow-sm",
+
+                    el(
+                      "div",
+                      "font-editorial font-bold text-xl text-stone-900",
+                      it.name
+                    ),
+
+
+                    el(
+
+                      "ol",
+
+                      "list-decimal pl-5 text-sm text-stone-700 space-y-1",
+
+                      ...it.steps.map(
+                        s =>
+                          el(
+                            "li",
+                            "",
+                            s
+                          )
+                      )
+
+                    ),
+
+
+                    el(
+
+                      "div",
+
+                      "font-mono text-xs text-stone-600 bg-stone-100 p-3 rounded-none",
+
+                      "Required Paperwork: " +
+                      it.docs.join("; ")
+
+                    ),
+
+
+                    it.url
+
+                      ? (() => {
+
+                          const a = el(
+
+                            "a",
+
+                            "font-mono text-xs text-sky-700 underline font-bold inline-block",
+
+                            "↗ Access Gateway"
+
+                          );
+
+                          a.href =
+                            it.url;
+
+                          a.target =
+                            "_blank";
+
+                          a.rel =
+                            "noopener noreferrer";
+
+                          return a;
+
+                        })()
+
+                      : null
+
+                  )
+
+              )
+
+            )
+
+          );
+
+        }
+
+      );
+
+
+      if (
+        r.documents_needed.length
+      ) {
+
+        root.append(
+
+          el(
+
+            "div",
+
+            "p-5 border border-stone-300 rounded-none bg-stone-100",
+
+            el(
+
+              "h3",
+
+              "font-mono text-xs uppercase tracking-widest text-orange-600 font-bold mb-3",
+
+              "— Master Document Checklist"
+
+            ),
+
+            el(
+
+              "ul",
+
+              "list-disc pl-5 font-mono text-xs text-stone-700 space-y-1",
+
+              ...r.documents_needed.map(
+
+                d =>
+                  el(
+                    "li",
+                    "",
+                    d
+                  )
+
+              )
+
+            )
+
+          )
+
+        );
+
+      }
+
+
+      return root;
+
+    }
+
+
+    /* =========================================================
+       FORMS + LETTERS
+       ========================================================= */
+
+    function viewDrafts(r) {
+
+      const root =
+        el(
+          "div",
+          "space-y-7"
+        );
+
+
+      if (
+        !r.forms.length &&
+        !r.letters.length
+      ) {
+
+        return el(
+
+          "p",
+
+          "font-mono text-xs text-stone-500",
+
+          "No legal drafts required."
+
+        );
+
+      }
+
+
+      /* -------------------------
+         FORMS
+         ------------------------- */
+
+      r.forms.forEach(
+
+        f => {
+
+          const rows =
+
+            Object.entries(
+              f.fields
+            )
+            .map(
+
+              ([k, v]) =>
+
+                el(
+
+                  "tr",
+
+                  "border-t border-stone-300",
+
+                  el(
+                    "td",
+                    "py-3 pr-3 font-mono text-xs text-stone-500",
+                    k
+                  ),
+
+                  el(
+
+                    "td",
+
+                    "py-3 font-mono text-xs " +
+
+                    (
+                      String(v).includes("<<")
+                        ? "text-amber-700 font-bold"
+                        : "text-stone-800"
+                    ),
+
+                    String(v)
+
+                  )
+
+                )
+
+            );
+
+
+          const b = el(
+            "button",
+            "chip-editorial font-mono text-xs",
+            "[ COPY JSON ]"
+          );
+
+
+          b.type = "button";
+
+
+          b.onclick = () =>
+
+            copy(
+              JSON.stringify(
+                f.fields,
+                null,
+                2
+              ),
+              b
+            );
+
+
+          root.append(
+
+            el(
+
+              "div",
+
+              "border border-stone-300 rounded-none p-5 space-y-4 bg-[#faf7ef]/90 shadow-sm",
+
+              el(
+
+                "div",
+
+                "flex items-center justify-between gap-2",
+
+                el(
+                  "h3",
+                  "font-editorial font-bold text-xl text-stone-900",
+                  f.title
+                ),
+
+                b
+
+              ),
+
+
+              el(
+
+                "div",
+
+                "overflow-x-auto",
+
+                el(
+                  "table",
+                  "w-full",
+                  ...rows
+                )
+
+              ),
+
+
+              el(
+
+                "p",
+
+                "font-mono text-[11px] text-stone-500 italic",
+
+                "Fields enclosed in <<brackets>> require user data insertion prior to gateway submission: " +
+                f.portal
+
+              )
+
+            )
+
+          );
+
+        }
+
+      );
+
+
+      /* -------------------------
+         LETTERS
+         ------------------------- */
+
+      r.letters.forEach(
+
+        l => {
+
+          const b = el(
+
+            "button",
+
+            "chip-editorial font-mono text-xs",
+
+            "[ COPY DRAFT ]"
+
+          );
+
+
+          b.type = "button";
+
+
+          b.onclick = () =>
+            copy(
+              l.body,
+              b
+            );
+
+
+          root.append(
+
+            el(
+
+              "div",
+
+              "border border-stone-300 rounded-none p-5 space-y-4 bg-[#faf7ef]/90 shadow-sm",
+
+              el(
+
+                "div",
+
+                "flex items-center justify-between gap-2",
+
+                el(
+                  "h3",
+                  "font-editorial font-bold text-xl text-stone-900",
+                  l.title
+                ),
+
+                b
+
+              ),
+
+
+              /* FIXED:
+                 The original version created an empty
+                 <pre>. This now actually renders l.body.
+              */
+
+              el(
+
+                "pre",
+
+                "border border-stone-300 rounded-none p-5 font-mono text-xs text-stone-800 bg-[#f1eadc] whitespace-pre-wrap leading-relaxed overflow-x-auto",
+
+                l.body
+
+              )
+
+            )
+
+          );
+
+
+          /* Local language draft */
+
+          if (l.body_local) {
+
+            const b2 = el(
+
+              "button",
+
+              "chip-editorial font-mono text-xs",
+
+              "[ COPY LOCAL ]"
+
+            );
+
+
+            b2.type = "button";
+
+
+            b2.onclick = () =>
+              copy(
+                l.body_local,
+                b2
+              );
+
+
+            root.append(
+
+              el(
+
+                "div",
+
+                "border border-stone-300 rounded-none p-5 space-y-4 bg-[#faf7ef]/90 shadow-sm",
+
+                el(
+
+                  "div",
+
+                  "flex items-center justify-between gap-2",
+
+                  el(
+
+                    "h4",
+
+                    "font-editorial font-bold text-lg text-stone-900",
+
+                    l.local_language +
+                    " Sovereign Draft"
+
+                  ),
+
+                  b2
+
+                ),
+
+
+                el(
+
+                  "pre",
+
+                  "border border-stone-300 rounded-none p-5 font-mono text-xs text-stone-800 bg-[#f1eadc] whitespace-pre-wrap leading-relaxed overflow-x-auto",
+
+                  l.body_local
+
+                )
+
+              )
+
+            );
+
+          }
+
+        }
+
+      );
+
+
+      return root;
+
+    }
+
+  </script>
+
 </body>
+
 </html>
