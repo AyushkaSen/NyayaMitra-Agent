@@ -1,4 +1,5 @@
 # NyayaMitra-Agent
+<<<<<<< HEAD
 
 Multi-agent assistant for Indian MSMEs, street vendors and citizens: checks documents, matches government
 schemes and compliance duties, and drafts forms and letters. Built for the BharatAgentic Hackathon
@@ -77,3 +78,6 @@ agent.yaml               aiKart-style manifest template
 - Add a scheme: append an entry to `schemes.json` (`kw` can hold Hindi, Bengali and other-language keywords; `rules` drives eligibility).
 - Add state schemes: new entries with `rules.segments_any` and a state check in `scheme_agent.evaluate`.
 - Better retrieval: replace `TfidfIndex` with a multilingual embedding model behind the same `search(query, k)`.
+=======
+navigating complex legal/government compliance and documentation for small businesses or citizens.
+>>>>>>> 090805e54200d95520e033b45f2ba0da423dbbae
